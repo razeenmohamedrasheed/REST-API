@@ -1,0 +1,67 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.venv
+*.virtualenv
+.env
+.venv/
+*.egg-info/
+*.egg
+*.db
+*.sqlite3
+*.log
+
+# FastAPI and Uvicorn
+*.pid
+*.log
+*.reload
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual Environment
+venv/
+env/
+*.env
+
+# Pytest cache and coverage
+.cache/
+.tox/
+.coverage
+*.cover
+htmlcov/
+pytest_cache/
+
+# Logs and Debug
+logs/
+debug.log
+error.log
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+
+# Build and Distribution
+dist/
+build/
+*.tar.gz
+*.whl
+
+# Ignore migrations (if using Alembic)
+alembic/versions/*.pyc
+alembic/versions/*.pyo
+
+# Local configs and secrets
+*.local
+*.secret
+*.bak
