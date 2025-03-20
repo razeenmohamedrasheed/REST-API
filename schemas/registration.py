@@ -7,3 +7,7 @@ class Registration(BaseModel):
     contact:str
     dob:str
     password:str
+
+class Login(BaseModel):
+    username:str
+    password:str

@@ -2,7 +2,7 @@ from fastapi import APIRouter,Depends,HTTPException
 from sqlalchemy.orm import Session
 from db import Sessionlocal
 from model.users import User
-from schemas.registration import Registration
+from schemas.registration import Registration,Login
 
 
 router = APIRouter()
@@ -28,7 +28,6 @@ async def registration(payload:Registration, db: Session = Depends(get_db)):
             dob=payload.dob,
             password=payload.password  
         )
-
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
@@ -38,3 +37,13 @@ async def registration(payload:Registration, db: Session = Depends(get_db)):
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=f"Failed to register user: {str(e)}")
+    
+
+@router.post('/login')
+def login(payload:Login, db: Session = Depends(get_db)):
+    try:
+        pass
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=500, detail=f"Login Failed: {str(e)}")
+
