@@ -9,5 +9,5 @@ class Registration(BaseModel):
     password:str
 
 class Login(BaseModel):
-    username:str
+    email:str
     password:str
