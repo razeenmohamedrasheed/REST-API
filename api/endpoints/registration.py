@@ -51,15 +51,15 @@ def login(payload:Login, db: Session = Depends(get_db)):
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
 
-        if not Hash.verify_password(payload.password, user.password):
+        if not Hashing.verify_password(payload.password, user.password):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Incorrect email or password"
             )
-        access_token = token.generate_access_token(user.email)
+        access_token = token.generate_access_token({"sub": user.email})
         return {
             "access_token": access_token,
-        }
+               }
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=f"Login Failed: {str(e)}")
