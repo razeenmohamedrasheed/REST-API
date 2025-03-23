@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from api.endpoints.registration import router
+from api.endpoints import registration, tasklist
 import uvicorn
 
 
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(registration.router)
+app.include_router(tasklist.router)
 
 
 if __name__ == "__main__":
