@@ -27,6 +27,7 @@ async def registration(payload:Registration, db: Session = Depends(get_db)):
         if existing_user:
             raise HTTPException(status_code=400, detail="User already exists")
         new_user = User(
+            user_role = 2,
             username=payload.username,
             email=payload.email,
             contact=payload.contact,
@@ -37,7 +38,7 @@ async def registration(payload:Registration, db: Session = Depends(get_db)):
         db.commit()
         db.refresh(new_user)
 
-        return {"msg": "User registered successfully", "user_id": new_user.id}
+        return {"msg": "User registered successfully", "user_id": new_user.user_id}
 
     except Exception as e:
         print(e)
@@ -56,10 +57,12 @@ def login(payload:Login, db: Session = Depends(get_db)):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Incorrect email or password"
             )
-        access_token = token.generate_access_token({"sub": user.email})
+        access_token = Token.generate_access_token({"sub": user.email})
         return {
             "access_token": access_token,
-               }
+            "token_type": "bearer",
+            "email": user.email
+            }
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=f"Login Failed: {str(e)}")
