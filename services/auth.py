@@ -29,8 +29,9 @@ class Token:
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
             email: str = payload.get("sub")
+            user_id: int = payload.get("user_id")
         
-            if email is None:
+            if email is None or user_id is None:
                 raise HTTPException(
                     status_code=status.HTTP_401_UNAUTHORIZED,
                     detail="Invalid token or missing username"

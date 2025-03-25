@@ -57,11 +57,12 @@ def login(payload:Login, db: Session = Depends(get_db)):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Incorrect email or password"
             )
-        access_token = Token.generate_access_token({"sub": user.email})
+        access_token = Token.generate_access_token({"sub": user.email, "user_id": user.user_id })
         return {
             "access_token": access_token,
             "token_type": "bearer",
-            "email": user.email
+            "email": user.email,
+            "user_id":user.user_id
             }
     except Exception as e:
         print(e)
