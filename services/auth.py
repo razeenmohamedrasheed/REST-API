@@ -30,6 +30,7 @@ class Token:
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
             email: str = payload.get("sub")
             user_id: int = payload.get("user_id")
+            role_id: int = payload.get("role_id")
         
             if email is None or user_id is None:
                 raise HTTPException(

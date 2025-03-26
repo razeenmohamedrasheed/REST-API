@@ -7,7 +7,7 @@ from model.users import User
 from schemas.registration import Registration,Login
 
 
-router = APIRouter()
+router = APIRouter( tags=["Authentication"])
 Hash   = Hashing()
 token  = Token()
 
@@ -57,12 +57,13 @@ def login(payload:Login, db: Session = Depends(get_db)):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Incorrect email or password"
             )
-        access_token = Token.generate_access_token({"sub": user.email, "user_id": user.user_id })
+        access_token = Token.generate_access_token({ "sub": user.email,
+                                                     "user_id": user.user_id ,
+                                                     "role_id":user.user_role })
         return {
             "access_token": access_token,
             "token_type": "bearer",
             "email": user.email,
-            "user_id":user.user_id
             }
     except Exception as e:
         print(e)

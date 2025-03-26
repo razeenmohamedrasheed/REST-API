@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.endpoints import registration, tasklist
+from api.endpoints import registration, tasklist, file_data
 import uvicorn
 
 
@@ -7,6 +7,7 @@ app = FastAPI()
 
 app.include_router(registration.router)
 app.include_router(tasklist.router)
+app.include_router(file_data.router)
 
 
 if __name__ == "__main__":
