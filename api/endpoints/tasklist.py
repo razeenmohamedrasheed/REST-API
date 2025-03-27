@@ -59,3 +59,13 @@ async def view_individual_task( db: Session = Depends(get_db),current_user: dict
             for item in tasks                    
         ]
     }
+
+@router.put('/tasks')
+async def update_tasks( db: Session = Depends(get_db),current_user: dict = Depends(Token.verify_token)):
+    try:
+        pass
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to create task. Please try again. error:{e}"
+        )  
